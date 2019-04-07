@@ -1,0 +1,33 @@
+#!/usr/bin/env php
+<?php
+
+$current = readlink('current');
+$inactive = readlink('inactive');
+
+if ($current == false || $inactive == false) {
+  fwrite(STDERR, "Fatal error: Couldn\'t read symlinks.\nMake sure \"current\" and \"inactive\" are symbolic links relative to the working directory.\n");
+  exit(1);
+}
+
+if ($current == $inactive) {
+  fwrite(STDERR, "Fatal error: current and inactive link to same location, so cannot swap them.\n");
+  exit(1);
+}
+
+if (! rename('current', '.current.safe-rename')) {
+  fwrite(STDERR, "Fatal error: could not rename symlink inode \"current\"\n");
+  exit(1);
+}
+
+if (! rename('inactive', 'current')) {
+  rename('.current.safe-rename', 'current');
+  fwrite(STDERR, "Fatal error: couldn't rename \"inactive\" symlink to \"current\".\n");
+  exit(1);
+}
+
+if (!rename('.current.safe-rename', 'inactive')) {
+  fwrite(STDERR, "Warning: The site was swapped, but could not set up an inactive symlink\n");
+  exit(1);
+}
+
+echo "Site swapped.\n";
