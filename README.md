@@ -13,9 +13,8 @@ to is the one handling requests right now.
 ## Getting Started
 1. Clone this repository
 2. Run `composer install`
-3. Run `composer drupal:scaffold`
-4. All the  code was installed to the inactive copy. Make the newly installed code
+3. All the  code was installed to the inactive copy. Make the newly installed code
    active by running `./swap-active` in the project root.
-5. Hook it to a webserver and visit your Drupal site!
+4. Hook it to a webserver and visit your Drupal site!
 
-This arrangement may be of particular use for automatic updates.
+An arrangement like this may be of particular use for automatic updates.
