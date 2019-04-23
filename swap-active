@@ -30,4 +30,11 @@ if (!rename('.current.safe-rename', 'inactive')) {
   exit(1);
 }
 
+$contents = sprintf("<?php\n\nrequire_once '../%s/index.php';\n", $inactive);
+
+if (file_put_contents("html/index.php", $contents) == FALSE) {
+  fwrite(STDERR, "Fatal error: The site was swapped, but could not write new index.php file\n");
+  exit(1);
+}
+
 echo "Site swapped.\n";
