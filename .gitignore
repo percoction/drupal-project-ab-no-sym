@@ -30,3 +30,11 @@ vendor/
 
 # Ignore composer.lock - not trying to force strict reqs
 composer.lock
+
+# Ignore symlinks to our docroots
+current
+inactive
+
+# Ignore all of displaced docroot for now
+a/
+b/
