@@ -27,3 +27,6 @@ vendor/
 
 # Ignore .env files as they are personal
 /.env
+
+# Ignore composer.lock - not trying to force strict reqs
+composer.lock
